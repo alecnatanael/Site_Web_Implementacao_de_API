@@ -14,13 +14,11 @@ $('#cadastroDeAcordo').change(function () {
 
 /* ENVIAR CADASTRO */
 const formularioCadastro = document.getElementById("formCadastro");
-//formularioCadastro.addEventListener("submit", validarCadastro, true)
 formularioCadastro.addEventListener("submit", enviarFormularioCadastro, true);
 
 
 function enviarFormularioCadastro(event) {
     event.preventDefault();
-    //alert("Requer implementação...");
     
     $("#formCadastro .invalid-feedback").remove(); // remover campo marcado com 'invalid-feedback'
     $("#formCadastro .is-invalid").removeClass("is-invalid"); // remover a classe 'is-invalid' dos campos marcados com ela
@@ -84,25 +82,10 @@ function apagarCadastro() {
     document.querySelector("#cadastroFeminino").checked = 'F'
 }
 
-// Validar cadastro
-
-/*function validarCadastro() {
-    const campoCadastro = 
-    fetch(URL_API + "/api/v1/cadastro/validar/documento/" + campoCadastro, {
-        method: "GET",
-            headers: new Headers({
-                Accept: "application/json",
-                'Content-Type': "application/json",
-            })
-    })
-    .then(response => {
-        return response.json();
-    })
-}*/
-
 /* FIM ENVIAR CADASTRO */
 
-// Função de gerar desenho do campo inválido
+
+// Função de gerar desenho do campo inválido (para o cadastro e IMC)
 function criarDivDeCampoInvalido(idItem, textoErro, isFocarNoCampo) {
     const el = document.getElementById(idItem);
     isFocarNoCampo && el.focus();
@@ -113,7 +96,6 @@ function criarDivDeCampoInvalido(idItem, textoErro, isFocarNoCampo) {
     const elDiv = el.parentElement.appendChild(node);
     elDiv.classList.add("invalid-feedback");
 }
-
 
 
 /* CRIAR LISTA DE ESTADOS */
@@ -194,8 +176,8 @@ function popularEnderecoCadastro(){
         })
    // } 
 }
-/* FIM PREENCHER ENDEREÇO */
 
+// Função Criar div de Cep inválido
 function criarDivDeCepCampoInvalido(idItem, textoErro) {
     const el = document.getElementById(idItem);
     //el.focus();
@@ -206,6 +188,9 @@ function criarDivDeCepCampoInvalido(idItem, textoErro) {
     const elDiv = el.parentElement.appendChild(node);
     elDiv.classList.add("invalid-feedback");
 }
+
+/* FIM PREENCHER ENDEREÇO */
+
 
 /* IMC */
 
