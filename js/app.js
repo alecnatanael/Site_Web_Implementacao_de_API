@@ -141,46 +141,39 @@ function popularEnderecoCadastro(){
 
     const campoCep = document.getElementById('cadastroCep')
     const cepFormatado = campoCep.value.replace("-", "")
-    //if (cepFormatado.length == 8) {
-        fetch(URL_API + '/api/v1/endereco/' + cepFormatado, {
-            method: "GET",
-            headers: new Headers({
-                Accept: "application/json",
-                'Content-Type': "application/json",
-            })
+    fetch(URL_API + '/api/v1/endereco/' + cepFormatado, {
+        method: "GET",
+        headers: new Headers({
+            Accept: "application/json",
+            'Content-Type': "application/json",
         })
-        .then(response => {
-            return response.json();
-        }).then(dadosCep => {
-            if (dadosCep && !dadosCep.message){
-                let campoLogradouro = document.getElementById('cadastroLogradouro')
-                let campoEstado = document.getElementById('cadastroUf')
-                let campoCidade = document.getElementById('cadastroCidade')
+    })
+    .then(response => {
+        return response.json();
+    }).then(dadosCep => {
+        if (dadosCep && !dadosCep.message){
+            let campoLogradouro = document.getElementById('cadastroLogradouro')
+            let campoEstado = document.getElementById('cadastroUf')
+            let campoCidade = document.getElementById('cadastroCidade')
 
-                campoLogradouro.value = dadosCep.logradouro ? dadosCep.logradouro : "" ;
-                campoEstado.value = dadosCep.uf ? dadosCep.uf : "" ;
-                campoCidade.value = dadosCep.localidade ? dadosCep.localidade : "" ;
+            campoLogradouro.value = dadosCep.logradouro ? dadosCep.logradouro : "" ;
+            campoEstado.value = dadosCep.uf ? dadosCep.uf : "" ;
+            campoCidade.value = dadosCep.localidade ? dadosCep.localidade : "" ;
 
-            } else {
-                //alert(dadosCep.message)
-                criarDivDeCepCampoInvalido('cadastroCep', dadosCep.message)
-                    
-                
-                console.log(dadosCep.message)
-            }
-        })
-        .catch(err => {
-            criarDivDeCepCampoInvalido('cadastroCep', 'Por favor preencha com um valor válido!')
-            //alert('O CEP deve ser preenchido!');
-            console.log(err);
-        })
-   // } 
+        } else {
+            criarDivDeCepCampoInvalido('cadastroCep', dadosCep.message)
+            console.log(dadosCep.message)
+        }
+    })
+    .catch(err => {
+        criarDivDeCepCampoInvalido('cadastroCep', 'Por favor preencha com um valor válido!')
+        console.log(err);
+    })
 }
 
 // Função Criar div de Cep inválido
 function criarDivDeCepCampoInvalido(idItem, textoErro) {
     const el = document.getElementById(idItem);
-    //el.focus();
     el.classList.add("is-invalid");
     const node = document.createElement("div");
     const textnode = document.createTextNode(textoErro);
