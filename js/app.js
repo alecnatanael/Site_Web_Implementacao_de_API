@@ -135,7 +135,6 @@ function criarOption(valor, texto) {
 
 /* PREENCHER ENDEREÇO */
 function popularEnderecoCadastro(){
-    //alert("Requer implementação...");
     $(".invalid-feedback").remove(); // remover campo marcado com 'invalid-feedback'
     $(".is-invalid").removeClass("is-invalid"); // remover a classe 'is-invalid' dos campos marcados com ela
 
